@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Valentine letter</title>
+		<style>
+			body {
+				margin:0;
+				position:relative;
+				width:100vw;
+				height:100vh;			
+				background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+			}
+
+			#envelope-container {
+   			 height: 100vh; /* Adjust this value as needed */
+   			 overflow-y: auto;
+				}
+			
+			#envelope {
+				position:absolute;
+				top: calc(50vh - 200px);
+				left: calc(50vw - 150px);
+				width:300px;
+				height:300px;
+			}
+			
+			#envelope > * {
+				position:absolute;
+				top: 0;
+				left: 0;
+				display:none;
+			}
+			
+			#back {
+				display:block;
+				z-index:0;
+			}
+			
+			#front {
+				display:block;
+				z-index:10;
+			}
+			
+			#top {
+				display:block;
+				z-index:11;
+			}
+			
+			#top.animate, #front.animate, #back.animate, #envelope button.animate { 
+				opacity:0;
+				transition: opacity 1s;
+				transition-delay: 1s;
+			}
+			
+			
+
+
+			#letter {
+				display:flex;
+				flex-direction:column;
+				justify-content:space-around;
+				align-items:center;
+				background-color: white;
+				padding:10px;
+				z-index:5;
+				left:15px;
+				right:15px;
+				bottom:5px;
+				top:105px;
+				/* https://boxshadows.com/presets */
+				box-shadow:0px 1px 3px 0px rgba(0,0,0,0.1) , 0px 1px 2px 0px rgba(0,0,0,0.06) ;
+				overflow:hidden;
+				font-size:16px;
+				
+			}
+			
+			#letter.animate {
+				animation:makebig 2s forwards; 
+				animation-delay: 1s;
+			}
+			
+			@keyframes makebig {
+				0% { top: 105px; left: 15px; right: 15px; bottom: 5px; font-size:16px;}
+				33% { top: -100px; left: 15px; right: 15px; bottom: 150px; font-size:16px; }
+				100% { top: -100px; left: -25px; right: -25px; bottom: -100px;font-size: 24px; }
+			}
+			
+			
+			#letter-content {
+			max-width: 80%; /* Limit the width of the content */
+			padding: 10px;
+			overflow-y: auto; /* Add scrollability */
+			}
+
+			#letter h1 {
+				font-size: 24px;
+			}
+
+			#letter img {
+				max-width: 100%; /* Make images responsive */
+				height: auto;
+			}
+
+			#letter p {
+				font-size: 16px;
+			}
+
+			#letter h2 {
+				font-size: 20px;
+			}
+
+			#flower-icon {
+				width: 80px; /* Adjust size as needed */
+				height: auto;
+				display: block;
+				margin: 10px auto; /* Center the flower icon horizontally */
+				transition: transform 0.3s ease; /* Add smooth transition effect */
+			}
+
+			#flower-icon:hover {
+				transform: scale(1.2); /* Increase the scale on hover */
+				cursor: pointer;
+			}
+
+			
+			#letter img {
+				height:50%;
+			}
+			
+			#envelope button {
+				display:block;
+				z-index:15;
+				width:50px;
+				height:50px;
+				border-radius:50%;
+				border:none;
+				background-color:gold;
+				font-weight:bold;
+				text-align: center;
+				color:rgb(14, 10, 10);
+				cursor:pointer;
+				top:calc(200px - 25px);
+				left:calc(150px - 25px);
+				transition: transform 1s, background-color 1s, color 1s;
+			}
+			
+			#envelope button:hover {
+				background-color:pink;
+				transform:scale(1.5);
+				color: black;
+				transition: transform 1s, background-color 1s, color 1s;
+			}
+
+			@media screen and (max-width: 768px) {
+			#letter-content {
+			max-width: 80%; /* Limit the width of the content */
+			padding: 10px;
+			overflow-y: auto; /* Add scrollability */
+			max-height: calc(100vh - 200px); /* Adjust max height for smaller screens */
+			}
+
+			#flower-icon {
+				width: 60px; /* Adjust size for smaller screens */
+				margin: 5px auto; /* Reduce margin for smaller screens */
+			}
+			#letter h1 {
+				font-size: 20px;
+			}
+
+			#letter p {
+				font-size: 14px;
+			}
+
+			#letter h2 {
+				font-size: 18px;
+			}
+
+			#flower-icon {
+				width: 60px; /* Adjust size for smaller screens */
+				margin: 5px auto; /* Reduce margin for smaller screens */
+			}
+			}
+		</style>
+		<script>
+			function openUp() {
+				const $opentop= document.querySelector('#opentop');
+				const $top= document.querySelector('#top');
+				const $front= document.querySelector('#front');
+				const $back= document.querySelector('#back');
+				const $letter= document.querySelector('#letter');
+				const $button= document.querySelector('button');
+				
+				$opentop.beginElement();
+				$top.style.zIndex = 2;
+				
+				$top.classList.add('animate');
+				$front.classList.add('animate');
+				$back.classList.add('animate');
+				$button.classList.add('animate');
+				$letter.classList.add('animate');
+				
+			}
+
+			function setHalfVolume() {
+        var myAudio = document.getElementById("audio");
+        myAudio.volume = 0.2;
+    }
+		</script>
+	</head>
+	<body>
+		<audio id="audio" style="display:none;" src="assets/bg.mp3" controls autoplay loop onloadeddata="setHalfVolume()"></audio>
+		<div id='envelope-container'>
+			<div id='envelope'>
+				<div id='back'>
+					<svg xmlns="http://www.w3.org/2000/svg" 
+						xmlns:xlink="http://www.w3.org/1999/xlink" 
+						height="300" width="300">
+						<polygon
+							points="0,100 300,100 300,300 0,300"
+							style="fill:#796479;stroke:none;stroke-width:0" />
+					</svg>
+				</div>
+				<div id='front'>
+					<svg xmlns="http://www.w3.org/2000/svg" 
+						xmlns:xlink="http://www.w3.org/1999/xlink" 
+						height="300" width="300">
+						<polygon
+							points="0,100 150,200 300,100 300,300 0,300"
+							style="fill:#D9AFD9; stroke:#97D9E1; stroke-width:3" />
+					</svg>
+				</div>
+				<div id='top'>
+					<svg xmlns="http://www.w3.org/2000/svg" 
+						xmlns:xlink="http://www.w3.org/1999/xlink" 
+						height="300" width="300">
+						<polygon
+							points="0,100 150,200 300,100"
+							style="fill:#BF96BF;stroke:#97D9E1;stroke-width:2">
+							<animate id='opentop' attributeName="points" dur="0.5s" fill="freeze" 
+							begin="indefinite"
+							from="0,100 150,200 300,100"
+							to="0,100 150,0 300,100"/>
+						</polygon>
+					</svg>
+				</div>
+				<div id='letter'>
+					<div id="letter-content">
+						<!-- Your letter content here -->
+						<h1> To: My Beautiful Girlfriend</h1>
+						<img src='https://usagif.com/wp-content/uploads/gify/gif-heart-title.gif'>
+						<p>	To my loving, caring, lovable, academic achiever girlfriend, HAPPY HAPPY VALENTINES DAY MAHAL 
+							<br>
+						Thank you for listening to me and giving validation to all of the emotions and experiences I encounter.
+							<br>
+						Thank you for being the one person who truly understands me, for lighting up my world with your laughter into my tired days. 
+							<br>
+						Thank you for comforting me when I feel lonely and for being the one I love. 
+							<br>
+						Thank you for being with me, despite the distance between us; each moment we share, no matter the miles, means the world to me.
+							<br>
+						Thank you for your unwavering support during times when I doubt myself; your belief in me gives me the strength to keep going, even when the going gets tough.
+							<br>
+						Thank you for your patience, your understanding, and your unwavering commitment to our relationship.
+							<br>
+						Thank you for the countless late-night calls, the heartfelt messages, virtual hugs, and virtual kisses that make the distance feel a little less daunting.
+							<br>
+						Thank you for journeying with me through every stage of life.
+							<br>
+						Thank you for your guidance and support, not just as my girlfriend, but as my confidante and partner.
+							<br>
+						Thank you for the hekhekhek hekhekhekehkehkehk beste hekhekhek hahahaha.
+							<br>
+						Thank you for simply being yourself. Your unwavering support and belief in my success mean the world to me.
+							<br>
+						Thank you for being the most amazing girlfriend a guy could ever ask for. Having you in my life fills me with gratitude beyond words, and I promise to cherish every moment we share together.
+							<br>
+						Thank you for being my partner, my best friend, my future wifey enebe, and my everything. I love you more than words can express, and I am endlessly grateful for the beautiful love we share.
+							<br>
+						"I LOVE YOU, MY ONLY WIFEY, AND HAPPY HAPPY 4TH VALENTINE'S WITH ME! YOU FILL MY LIFE WITH LOVE, JOY, AND ENDLESS HAPPINESS. HERE'S TO MANY MORE BEAUTIFUL MOMENTS TOGETHER.
+							<br>
+
+						</p>
+						<h2>From: Your Hot Boyfriend</h2>
+						<a href="https://ryanayo74.github.io/Flowers-for-My-Love/">
+							<img src="assets/flowers.png" alt="Flower Icon" id="flower-icon">  
+						</a>
+					</div>
+				</div>				
+				<button id="play" onclick='openUp()'>
+					Click Here
+				</button>	
+	</body>
+</html>
